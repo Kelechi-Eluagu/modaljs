@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login and Resigter form</title>
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/jquery.modal.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery3.1.0.min.js"></script>
+    <script src="js/jquery.modal.min.js"></script>
+</head>
+
+<body>
+    <!--registration form-->
+    <div id="register" class="modal custome_modal">
+        <div class="contact_form">
+            <h2>Hello there, <span>Signup here</span></h2>
+            <div class="contact_input_">
+                <p>Your name</p>
+                <input type="text" class="form_input">
+            </div>
+            <div class="contact_input_">
+                <p>Your Email Address</p>
+                <input type="text" class="form_input">
+            </div>
+            <div class="contact_input_">
+                <p>Your Telephone Number</p>
+                <input type="text" class="form_input">
+            </div>
+            <div class="cta_group">
+                <div class="cta submit_btn">Create Account</div>
+            </div>
+        </div>
+        <p class="info_">
+            Already have an Account
+            <a href="#login" class="open-modal info_item">Login</a>
+        </p>
+        <a href="#" rel="modal:close" class="close_modal">
+            <i class="fa fa-close"></i>
+        </a>
+    </div>
+
+    <!--login form-->
+    <div id="login" class="modal custome_modal">
+        <div class="contact_form">
+            <h2>Welcome Back, <span>Login here</span></h2>
+            <div class="contact_input_">
+                <p>Your Email Address</p>
+                <input type="text" class="form_input">
+            </div>
+            <div class="contact_input_">
+                <p>Your Password</p>
+                <input type="password" class="form_input">
+            </div>
+            <div class="cta_group">
+                <div class="cta submit_btn">Log In</div>
+            </div>
+        </div>
+        <p class="info_">
+            Do not have an account with us
+            <a href="#register" class="open-modal info_item_">Sign Up</a>
+        </p>
+        <a href="#" rel="modal:close" class="close_modal">
+            <i class="fa fa-close"></i>
+        </a>
+        <a href="#forgotPassword" class="open-modal forgot_password">
+            Forgot Password
+        </a>
+    </div>
+
+    <!--Forgot password form-->
+    <div id="forgotPassword" class="modal custome_modal">
+        <div class="contact_form">
+            <h2>Forgot <span>Password</span></h2>
+            <p class="password_info">
+                Please enter you emain below, we will send you the password
+            </p>
+            <div class="contact_input_">
+                <p>Your Email Address</p>
+                <input type="text" class="form_input">
+            </div>
+            <div class="cta_group">
+                <div class="cta submit_btn">Submit</div>
+            </div>
+        </div>
+        <a href="#" rel="modal:close" class="close_modal">
+            <i class="fa fa-close"></i>
+        </a>
+        <a href="#login" class="open-modal forgot_password">
+            Cancle
+        </a>
+    </div>
+
+    <div class="cta_group main_">
+        <a href="#register" class="open-modal cta">
+            Login and register Modal
+        </a>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("a.open-modal").click(function () {
+                $(this).modal({
+                    fadeDuration: 200,
+                    showClose: false
+                })
+                return false;
+            })
+            //for input animation
+            $(".contact_form .contact_input_").on("focusin", ".form_input", function () {
+                $(this).parent(".contact_input_")
+                    .children("p")
+                    .addClass("pushedUp")
+                    .css("color", "rgba(0,0,0,.5)")
+                let inputValue = $(this).val();
+                if (inputValue.length <= 0) {
+                    $(this).parent(".contact_input_")
+                        .children("p")
+                        .css("color", "rgba(0,0,0,.5)")
+                }
+            })
+            $(".contact_form .contact_input_").on("focusout", ".form_input", function () {
+                let inputValue = $(this).val();
+                if (inputValue.length <= 0) {
+                    $(this).parent(".contact_input_")
+                        .children("p")
+                        .removeClass("pushedUp")
+                        .css("color", "red");
+                }
+            })
+            $(".info_item_, .forgot_password").click(function () {
+                $(".form_input").val("");
+                $(".contact_input_")
+                    .children("p")
+                    .removeClass("pushedUp")
+                    .css("color", "rgba(0,0,0,.5)");
+            })
+        })
+    </script>
+</body>
+
+</html>
